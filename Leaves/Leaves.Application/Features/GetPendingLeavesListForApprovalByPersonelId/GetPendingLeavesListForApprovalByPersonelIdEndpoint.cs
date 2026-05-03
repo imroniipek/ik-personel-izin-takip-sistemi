@@ -11,7 +11,7 @@ public static class GetPendingLeavesListForApprovalByPersonelIdEndpoint
     {
         builder.MapPost("/GetPendingLeavesListForApprovalByPersonelIdQuery",
             async (
-                [FromBody] List<PersonelIdDto> personelIdDtoList,
+                [FromBody] List<PersonelDto> personelIdDtoList,
                 IMediator mediator) =>
             {
                 var query = new GetPendingLeavesListForApprovalByPersonelId(

@@ -125,4 +125,22 @@ public class LeaveRepository(LeaveDbContext context) : ILeaveRepository
         return leaves;
 
     }
-}
+
+    public async Task<bool> UpdateTheLeave(int leaveId, Leaves.Domain.Leave leave)
+    {
+        var currentLeave = await context.Leaves
+            .FirstOrDefaultAsync(x => x.Id == leaveId);
+
+        if (currentLeave is null)
+            return false;
+
+        currentLeave.StartedDate = leave.StartedDate;
+        currentLeave.EndedDate = leave.EndedDate;
+        currentLeave.Status = leave.Status;
+
+        await context.SaveChangesAsync();
+
+        return true;
+    }
+        
+    }

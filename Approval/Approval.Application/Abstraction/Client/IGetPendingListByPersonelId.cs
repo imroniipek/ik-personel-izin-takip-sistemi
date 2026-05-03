@@ -7,5 +7,5 @@ namespace Approval.Approval.Application.Abstraction.Client;
 public interface IGetPendingListByPersonelId
 {
     [Post("/api/GetPendingLeavesListForApprovalByPersonelIdQuery")]
-    Task<List<Leave>> GetPendingLeaveListByListPersonelIdDto([Body] List<PersonelIdDto> personelIds);
+    Task<List<Leave>> GetPendingLeaveListByListPersonelIdDto([Body] List<PersonelDto> personelIds);
 }

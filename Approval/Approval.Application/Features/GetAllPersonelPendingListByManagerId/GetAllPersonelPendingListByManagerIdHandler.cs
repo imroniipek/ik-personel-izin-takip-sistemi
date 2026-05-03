@@ -1,20 +1,21 @@
 ﻿using System.Net;
 using Approval.Approval.Application.Abstraction.Client;
-using Leaves.Leaves.Domain;
 using MediatR;
 using Shared.ServiceResult;
 
 namespace Approval.Approval.Application.Features.GetAllPersonelPendingListByManagerId;
 
-public class GetAllPersonelPendingListByManagerIdHandler(IGetPersonelByManagerIdFromServices managerIdFromServices,IGetPendingListByPersonelId pendingListService):IRequestHandler<GetAllPersonelPendingListByManagerId,ServiceResult<List<Leave>>>
+public class GetAllPersonelPendingListByManagerIdHandler(
+    IGetPersonelByManagerIdFromServices managerIdFromServices,
+    IGetPendingListByPersonelId pendingListService):IRequestHandler<GetAllPersonelPendingListByManagerId,ServiceResult<List<GetAllPersonelPendingListByManagerIdDto>>>
 {
-    public async Task<ServiceResult<List<Leave>>> Handle(GetAllPersonelPendingListByManagerId request, CancellationToken cancellationToken)
+    public async Task<ServiceResult<List<GetAllPersonelPendingListByManagerIdDto>>> Handle(GetAllPersonelPendingListByManagerId request, CancellationToken cancellationToken)
     {
         var personelList = await managerIdFromServices.GetPersonelByManagerId(request.ManagerId);
 
-        if (personelList is null || !personelList.Any())
+        if (!personelList.Any())
         {
-            return ServiceResult<List<Leave>>.Error(
+            return ServiceResult<List<GetAllPersonelPendingListByManagerIdDto>>.Error(
                 "Personeller bulunamadı",
                 "Bu manager'a bağlı personel bulunamadı.",
                 HttpStatusCode.NotFound
@@ -22,6 +23,23 @@ public class GetAllPersonelPendingListByManagerIdHandler(IGetPersonelByManagerId
         }
         var leaveList=await pendingListService.GetPendingLeaveListByListPersonelIdDto(personelList);
 
-        return ServiceResult<List<Leave>>.SuccessOk(leaveList);
+        List<GetAllPersonelPendingListByManagerIdDto> personelsListResponse = [];
+
+        foreach (var personel in personelList)
+        {
+            foreach (var leave  in leaveList)
+            {
+                if (personel.PersonelId == leave.PersonelId)
+                {
+                    var personelPendingListByManagerIdDto =
+                        new GetAllPersonelPendingListByManagerIdDto(personel.FirstName, personel.LastName,
+                           leave.Id, leave.StartedDate, leave.EndedDate);
+
+                    personelsListResponse.Add(personelPendingListByManagerIdDto);
+                }
+            }
+          
+        }
+        return ServiceResult<List<GetAllPersonelPendingListByManagerIdDto>>.SuccessOk(personelsListResponse);
     }
 }

@@ -14,7 +14,7 @@ public static class CreatePersonelEndpoint
             {
                 var result = await mediator.Send(command);
                 return result.ToResult();
-            }).AddEndpointFilter<CreatePersonelValidation>();
+            });
 
         return builder;
     }

@@ -6,5 +6,5 @@ namespace Approval.Approval.Application.Abstraction.Client;
 public interface IGetPersonelByManagerIdFromServices
 {
     [Get("/api/getPersonelByManagerId")]
-    Task<List<PersonelIdDto>> GetPersonelByManagerId(int managerId);
+    Task<List<PersonelDto>> GetPersonelByManagerId(int managerId);
 }

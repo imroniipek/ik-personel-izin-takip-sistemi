@@ -60,4 +60,22 @@ public class DepartmentRepository(PersonelDbContext context) : IDepartmentReposi
             .Select(d => d.Manager != null ? d.Manager.FirstName + " " + d.Manager.LastName : null)
             .FirstOrDefaultAsync();
     }
+    public async Task<bool> IsThisAManager(int personelId)
+    {
+        return await context.Departments
+            .AsNoTracking()
+            .AnyAsync(x => x.ManagerId == personelId);
+    }
+    public async Task<List<Domain.Personel>> GetPersonelsByManagerIdWithoutManagerAsync(int managerId)
+    {
+        var department = await context.Departments
+            .Include(x => x.Personels)
+            .FirstOrDefaultAsync(x => x.ManagerId == managerId);
+
+        return department?.Personels
+            .Where(x => x.Id != managerId)
+            .ToList() ?? new List<Domain.Personel>();
+    }
+    
+    
 }

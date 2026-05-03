@@ -1,0 +1,3 @@
+﻿namespace Approval.Approval.Application.Features.GetAllPersonelPendingListByManagerId;
+
+public record GetAllPersonelPendingListByManagerIdDto(string FirstName,string LastName,int LeaveId,DateOnly StartedDate,DateOnly EndendDate);

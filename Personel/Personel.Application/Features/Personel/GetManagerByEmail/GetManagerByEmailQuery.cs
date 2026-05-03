@@ -1,6 +1,7 @@
-﻿namespace Personel.Personel.Application.Features.Personel.GetManagerByEmail;
+﻿using MediatR;
+using Personel.Personel.Application.Features.Personel.GetPersonelByEmail;
+using Shared.ServiceResult;
 
-public class GetManagerByEmailQuery
-{
-    
-}
+namespace Personel.Personel.Application.Features.Personel.GetManagerByEmail;
+
+public record GetManagerByEmailQuery(string Email):IRequest<ServiceResult<GetPersonelByEmailResponse>>{}

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Personel.Personel.Infrastucture.Context;
 
@@ -11,9 +12,11 @@ using Personel.Personel.Infrastucture.Context;
 namespace Personel.Migrations
 {
     [DbContext(typeof(PersonelDbContext))]
-    partial class PersonelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260429230948_AddUniqueIndexToPersonelEmail")]
+    partial class AddUniqueIndexToPersonelEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

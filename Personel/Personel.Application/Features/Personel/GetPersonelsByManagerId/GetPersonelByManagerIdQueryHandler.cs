@@ -6,18 +6,18 @@ using Shared.ServiceResult;
 namespace Personel.Personel.Application.Features.Personel.GetPersonelsByManagerId;
 
 public class GetPersonelByManagerIdQueryHandler(IDepartmentRepository repository)
-    : IRequestHandler<GetPersonelByManagerIdQuery, ServiceResult<List<PersonelIdDto>>>
+    : IRequestHandler<GetPersonelByManagerIdQuery, ServiceResult<List<PersonelDto>>>
 {
-    public async Task<ServiceResult<List<PersonelIdDto>>> Handle(
+    public async Task<ServiceResult<List<PersonelDto>>> Handle(
         GetPersonelByManagerIdQuery request,
         CancellationToken cancellationToken)
     {
         var personelList = await repository.GetPersonelsByManagerIdAsync(request.ManagerId);
 
         var personelDtoList = personelList
-            .Select(x => new PersonelIdDto(x.Id))
+            .Select(x => new PersonelDto(x.Id,x.FirstName,x.LastName))
             .ToList();
 
-        return ServiceResult<List<PersonelIdDto>>.SuccessOk(personelDtoList);
+        return ServiceResult<List<PersonelDto>>.SuccessOk(personelDtoList);
     }
 }

@@ -7,12 +7,16 @@ public static class GetAllPersonelPendingListByManagerIdEndpoint
 {
     public static RouteGroupBuilder AddGetAllPersonelPendingListByManagerIdEndpoint(this RouteGroupBuilder builder)
     {
-        builder.MapGet("/GetPendingLeavesListForApprovalByPersonelIdQuery", async (int managerId, IMediator mediator) =>
-        {
-            var theResponse=await mediator.Send(new GetAllPersonelPendingListByManagerId(managerId));
+        builder.MapGet("/GetPendingLeavesListForApprovalByPersonelIdQuery/{managerId}",
+            async (int managerId, IMediator mediator) =>
+            {
+                var response = await mediator.Send(
+                    new GetAllPersonelPendingListByManagerId(managerId)
+                );
 
-            return theResponse.ToResult();
-        });
+                return response.ToResult();
+            });
+
         return builder;
     }
 }

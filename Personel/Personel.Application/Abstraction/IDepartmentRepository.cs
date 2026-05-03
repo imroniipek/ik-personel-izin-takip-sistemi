@@ -20,4 +20,8 @@ public interface IDepartmentRepository
     Task<List<DepartmentDto>> GetAllDepartmentsWithNamesAsync();
 
     Task<string?> GetManagerNameByIdAsync(int departmentId);
+
+    Task<bool> IsThisAManager(int personelId);
+
+    Task<List<Domain.Personel>> GetPersonelsByManagerIdWithoutManagerAsync(int managerId);
 }
