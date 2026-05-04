@@ -2,7 +2,6 @@
 using Approval.Approval.Application.Abstraction.Client;
 using MediatR;
 using Shared.ServiceResult;
-
 namespace Approval.Approval.Application.Features.GetAllPersonelPendingListByManagerId;
 
 public class GetAllPersonelPendingListByManagerIdHandler(
@@ -34,11 +33,9 @@ public class GetAllPersonelPendingListByManagerIdHandler(
                     var personelPendingListByManagerIdDto =
                         new GetAllPersonelPendingListByManagerIdDto(personel.FirstName, personel.LastName,
                            leave.Id, leave.StartedDate, leave.EndedDate);
-
                     personelsListResponse.Add(personelPendingListByManagerIdDto);
                 }
             }
-          
         }
         return ServiceResult<List<GetAllPersonelPendingListByManagerIdDto>>.SuccessOk(personelsListResponse);
     }

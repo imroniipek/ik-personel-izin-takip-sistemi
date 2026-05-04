@@ -24,4 +24,6 @@ public interface IDepartmentRepository
     Task<bool> IsThisAManager(int personelId);
 
     Task<List<Domain.Personel>> GetPersonelsByManagerIdWithoutManagerAsync(int managerId);
+
+    Task<int> GetManagersCountAsync();
 }

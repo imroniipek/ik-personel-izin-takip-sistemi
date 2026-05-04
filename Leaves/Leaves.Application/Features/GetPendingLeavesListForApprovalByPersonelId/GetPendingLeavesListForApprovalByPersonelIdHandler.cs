@@ -1,11 +1,8 @@
 ﻿using Leaves.Leaves.Application.Abstraction.Repositories;
 using MediatR;
-
 namespace Leaves.Leaves.Application.Features.GetPendingLeavesListForApprovalByPersonelId;
 
-public class GetPendingLeavesListForApprovalByPersonelIdHandler(
-    ILeaveRepository repository
-) : IRequestHandler<GetPendingLeavesListForApprovalByPersonelId, List<Domain.Leave>>
+public class GetPendingLeavesListForApprovalByPersonelIdHandler(ILeaveRepository repository ) : IRequestHandler<GetPendingLeavesListForApprovalByPersonelId, List<Domain.Leave>>
 {
     public async Task<List<Domain.Leave>> Handle(
         GetPendingLeavesListForApprovalByPersonelId request,
@@ -18,10 +15,7 @@ public class GetPendingLeavesListForApprovalByPersonelIdHandler(
             var theList = await repository
                 .GetPendingLeavesForApprovalByPersonelId(personelIdDto.PersonelId);
 
-            if (theList is not null)
-            {
-                theLeaveList.AddRange(theList);
-            }
+            theLeaveList.AddRange(theList);
         }
 
         return theLeaveList;

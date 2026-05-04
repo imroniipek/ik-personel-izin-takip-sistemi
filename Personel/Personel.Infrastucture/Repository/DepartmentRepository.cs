@@ -3,7 +3,6 @@ using Personel.Personel.Application.Abstraction;
 using Personel.Personel.Application.Features.Department.GetAllDepartmentWithNames;
 using Personel.Personel.Domain;
 using Personel.Personel.Infrastucture.Context;
-
 namespace Personel.Personel.Infrastucture.Repository;
 
 public class DepartmentRepository(PersonelDbContext context) : IDepartmentRepository
@@ -76,6 +75,11 @@ public class DepartmentRepository(PersonelDbContext context) : IDepartmentReposi
             .Where(x => x.Id != managerId)
             .ToList() ?? new List<Domain.Personel>();
     }
-    
-    
+
+    public async Task<int> GetManagersCountAsync()
+    {
+        var managerCount = await context.Departments.AsNoTracking().Where(x => x.ManagerId != null)
+            .Select(x => x.ManagerId).Distinct().CountAsync();
+        return managerCount;
+    }
 }

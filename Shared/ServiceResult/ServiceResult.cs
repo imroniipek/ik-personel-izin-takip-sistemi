@@ -229,7 +229,5 @@ public class ServiceResult<T>:ServiceResult
             Fail = problemDetails
         };
     }
-
-
-   
+    
 }
