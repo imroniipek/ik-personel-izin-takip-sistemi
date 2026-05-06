@@ -1,4 +1,5 @@
-﻿using Personel.Personel.Application.Features.Department.CreateDepartment;
+﻿using Personel.Personel.Application.Features.Auth;
+using Personel.Personel.Application.Features.Department.CreateDepartment;
 using Personel.Personel.Application.Features.Department.GetAllDepartmentWithNames;
 using Personel.Personel.Application.Features.Department.GetDepartmentCount;
 using Personel.Personel.Application.Features.Personel.GetPersonelsByManagerId;
@@ -19,22 +20,35 @@ public static class EndpointExtensions
 {
     public static WebApplication MapPersonelEndpoints(this WebApplication app)
     {
-        var group = app.MapGroup("/api");
+        var authGroup = app.MapGroup("/api/auth");
+        authGroup.AddAuthEndpoint();
 
-        group.CreateNewDepartment();
-        group.CreateNewPersonelEndpoint();
-        group.AddNewManagerByGivenDepartmentId();
-        group.AddGetAllPersonelQueryEndpoint();
-        group.MapGetPersonelForLeaveEndpoint();
-        group.GetPersonelsByManagerIdRoute();
-        group.MapGetAllPersonelCountEndpoint();
-        group.GetTheDepartmentCount();
-        group.AddGetAllDepartmentsWithNamesQueryEndpoint();
-        group.AddGetAllPersonelByDepartmentIdEnpoint();
-        group.AddGetPersonelByEmailEndpoint();
-        group.AddGetThePersonelQueryEndpoint();
-        group.AddGetManagerByEmailEndpoint();
-        group.AddGetManagerCountManager();
+        var internalGroup = app.MapGroup("/api");
+
+        var adminGroup = app.MapGroup("/api")
+            .RequireAuthorization("AdminOnly");
+
+        var personelGroup = app.MapGroup("/api")
+            .RequireAuthorization();
+
+        adminGroup.CreateNewDepartment();
+        adminGroup.CreateNewPersonelEndpoint();
+        adminGroup.AddNewManagerByGivenDepartmentId();
+        adminGroup.AddGetAllPersonelQueryEndpoint();
+        adminGroup.MapGetAllPersonelCountEndpoint();
+        adminGroup.GetTheDepartmentCount();
+        adminGroup.AddGetAllDepartmentsWithNamesQueryEndpoint();
+        adminGroup.AddGetAllPersonelByDepartmentIdEnpoint();
+        adminGroup.AddGetManagerCountManager();
+
+        // Refit / servisler arası çağrı için şimdilik token istemesin
+        internalGroup.MapGetPersonelForLeaveEndpoint();
+        internalGroup.GetPersonelsByManagerIdRoute();
+        
+        personelGroup.AddGetPersonelByEmailEndpoint();
+        personelGroup.AddGetThePersonelQueryEndpoint();
+        personelGroup.AddGetManagerByEmailEndpoint();
+
         return app;
     }
 }

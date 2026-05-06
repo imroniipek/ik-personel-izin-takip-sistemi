@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Shared.ServiceResult.Extensions;
 
 namespace Leaves.Leaves.Application.Features.GetLeavesForApproval;
