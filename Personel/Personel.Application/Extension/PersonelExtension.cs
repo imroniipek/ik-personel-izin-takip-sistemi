@@ -1,10 +1,12 @@
-﻿using Personel.Personel.Application.Features.Auth;
+﻿using Microsoft.AspNetCore.Builder;
+using Personel.Personel.Application.Features.Auth;
 using Personel.Personel.Application.Features.Department.CreateDepartment;
 using Personel.Personel.Application.Features.Department.GetAllDepartmentWithNames;
 using Personel.Personel.Application.Features.Department.GetDepartmentCount;
 using Personel.Personel.Application.Features.Personel.GetPersonelsByManagerId;
 using Personel.Personel.Application.Features.Personel.CreateManager;
 using Personel.Personel.Application.Features.Personel.CreatePersonel;
+using Personel.Personel.Application.Features.Personel.DeleteTheManager;
 using Personel.Personel.Application.Features.Personel.GetAllPersonel;
 using Personel.Personel.Application.Features.Personel.GetAllPersonelsByDepartmentId;
 using Personel.Personel.Application.Features.Personel.GetManagerByEmail;
@@ -34,17 +36,15 @@ public static class EndpointExtensions
         adminGroup.CreateNewDepartment();
         adminGroup.CreateNewPersonelEndpoint();
         adminGroup.AddNewManagerByGivenDepartmentId();
+        adminGroup.AddDeleteTheManagerEndpoint();
         adminGroup.AddGetAllPersonelQueryEndpoint();
         adminGroup.MapGetAllPersonelCountEndpoint();
         adminGroup.GetTheDepartmentCount();
         adminGroup.AddGetAllDepartmentsWithNamesQueryEndpoint();
         adminGroup.AddGetAllPersonelByDepartmentIdEnpoint();
         adminGroup.AddGetManagerCountManager();
-
-        // Refit / servisler arası çağrı için şimdilik token istemesin
         internalGroup.MapGetPersonelForLeaveEndpoint();
         internalGroup.GetPersonelsByManagerIdRoute();
-        
         personelGroup.AddGetPersonelByEmailEndpoint();
         personelGroup.AddGetThePersonelQueryEndpoint();
         personelGroup.AddGetManagerByEmailEndpoint();

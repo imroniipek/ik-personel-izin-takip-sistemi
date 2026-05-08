@@ -3,7 +3,7 @@ using Personel.Personel.Infrastucture.Context;
 
 namespace Personel.Personel.Infrastucture.Extension;
 
-public static class InfrastructureServiceExtension
+public static class  InfrastructureServiceExtension
 {
     public static IServiceCollection AddInfrastructureServices(
         this IServiceCollection services,

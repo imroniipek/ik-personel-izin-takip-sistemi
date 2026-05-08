@@ -18,13 +18,9 @@ public class CreateApprovalHandler(
         CreateApproval request,
         CancellationToken cancellationToken)
     {
-        Domain.Approval? createdApproval = null;
-
-
-       
         var personelList = await managerIdFromServices.GetPersonelByManagerId(request.ManagerId);
 
-        if (personelList is null || !personelList.Any())
+        if (!personelList.Any())
         {
             return ServiceResult<CreateApprovalResponse>.Error(
                 "Personeller bulunamadı",
@@ -47,7 +43,7 @@ public class CreateApprovalHandler(
         var leaveList =
             await leaveListForApproval.GetLeaveListForApproval(request.PersonelId);
 
-        if (leaveList is null || !leaveList.Any())
+        if (!leaveList.Any())
         {
             return ServiceResult<CreateApprovalResponse>.Error(
                 "İzin bulunamadı",
@@ -81,7 +77,7 @@ public class CreateApprovalHandler(
             RejectionReason = request.RejectReason
         };
 
-        createdApproval = await repository.CreateApproval(newApproval);
+        await repository.CreateApproval(newApproval);
 
         var updatedLeaveDto = new LeaveDto(
             selectedLeave.Id,

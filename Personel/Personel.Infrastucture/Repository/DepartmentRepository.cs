@@ -82,4 +82,35 @@ public class DepartmentRepository(PersonelDbContext context) : IDepartmentReposi
             .Select(x => x.ManagerId).Distinct().CountAsync();
         return managerCount;
     }
+    
+    public async Task<bool> DeleteTheManagerByDepartmentIdAsync(int departmentId)
+    {
+        var department = await context.Departments
+            .FirstOrDefaultAsync(x => x.Id == departmentId);
+
+        if (department is null)
+            return false;
+
+        if (department.ManagerId is null)
+            return false;
+
+        department.ManagerId = null;
+
+        await context.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task UpdateTheManager(int managerId, int departmentId)
+    {
+        var theDepartment = await context.Departments
+            .FirstOrDefaultAsync(x => x.Id == departmentId);
+
+        if (theDepartment == null)
+            return;
+
+        theDepartment.ManagerId = managerId;
+
+        await context.SaveChangesAsync();
+    }
 }

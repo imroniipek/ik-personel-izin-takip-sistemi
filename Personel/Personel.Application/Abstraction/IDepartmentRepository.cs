@@ -1,4 +1,6 @@
-﻿using Personel.Personel.Application.Features.Department.GetAllDepartmentWithNames;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Personel.Personel.Application.Features.Department.GetAllDepartmentWithNames;
 using Personel.Personel.Domain;
 
 namespace Personel.Personel.Application.Abstraction;
@@ -26,4 +28,8 @@ public interface IDepartmentRepository
     Task<List<Domain.Personel>> GetPersonelsByManagerIdWithoutManagerAsync(int managerId);
 
     Task<int> GetManagersCountAsync();
+
+    Task <bool> DeleteTheManagerByDepartmentIdAsync(int departmentId);
+
+    Task UpdateTheManager(int managerId, int departmentId);
 }

@@ -1,4 +1,7 @@
-﻿namespace Personel.Personel.Application.Abstraction;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Personel.Personel.Application.Abstraction;
 
 public interface IPersonelRepository
 {

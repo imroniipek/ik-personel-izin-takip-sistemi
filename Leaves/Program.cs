@@ -41,7 +41,7 @@ builder.Services.AddRefitClient<IPersonelApi>()
     .ConfigureHttpClient(client =>
     {
         client.BaseAddress = new Uri(
-            builder.Configuration["Services:PersonelServiceUrl"]!
+            builder.Configuration["Services:PersonelServiceUrl"] ?? string.Empty
         );
     });
 

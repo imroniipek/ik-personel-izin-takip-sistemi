@@ -13,7 +13,7 @@ public static class ServiceResultExtension
 
             HttpStatusCode.Created => Results.Created($"/api/resource/{serviceResult.Data}", serviceResult.Data),
 
-            HttpStatusCode.BadRequest => Results.BadRequest(serviceResult.Fail!),
+            HttpStatusCode.BadRequest => Results.BadRequest(serviceResult.Fail),
 
             HttpStatusCode.NotFound => Results.NotFound(serviceResult.Fail),
 
@@ -25,15 +25,15 @@ public static class ServiceResultExtension
 
     }
 
-    public static IResult ToResult(this global::Shared.ServiceResult.ServiceResult serviceResult)
+    public static IResult ToResult(this ServiceResult serviceResult)
     {
         return serviceResult.StatusCode switch
         {
             HttpStatusCode.NoContent=>Results.NoContent(),
             
-            HttpStatusCode.BadRequest => Results.BadRequest(serviceResult.Fail!),
+            HttpStatusCode.BadRequest => Results.BadRequest(serviceResult.Fail),
 
-            HttpStatusCode.NotFound => Results.NotFound(serviceResult.Fail!),
+            HttpStatusCode.NotFound => Results.NotFound(serviceResult.Fail),
 
             HttpStatusCode.Conflict => Results.Conflict(serviceResult.Fail),
 
