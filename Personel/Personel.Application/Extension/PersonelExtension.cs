@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Leaves.Leaves.Application.Features.UpdateTheLeave;
 using Personel.Personel.Application.Features.Auth;
 using Personel.Personel.Application.Features.Department.CreateDepartment;
 using Personel.Personel.Application.Features.Department.GetAllDepartmentWithNames;
@@ -15,6 +15,7 @@ using Personel.Personel.Application.Features.Personel.GetPersonelByEmail;
 using Personel.Personel.Application.Features.Personel.GetPersonelForLeave;
 using Personel.Personel.Application.Features.Personel.GetPersonelsCount;
 using Personel.Personel.Application.Features.Personel.GetThePersonel;
+using Personel.Personel.Application.Features.Personel.UpdateTheManager;
 
 namespace Personel.Personel.Application.Extension;
 
@@ -43,6 +44,7 @@ public static class EndpointExtensions
         adminGroup.AddGetAllDepartmentsWithNamesQueryEndpoint();
         adminGroup.AddGetAllPersonelByDepartmentIdEnpoint();
         adminGroup.AddGetManagerCountManager();
+        adminGroup.AddUpdateTheManagerEndpoint();
         internalGroup.MapGetPersonelForLeaveEndpoint();
         internalGroup.GetPersonelsByManagerIdRoute();
         personelGroup.AddGetPersonelByEmailEndpoint();

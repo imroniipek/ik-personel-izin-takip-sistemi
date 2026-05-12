@@ -13,6 +13,5 @@ public class GetAllPersonelByDepartmentIdHandler(IPersonelRepository personelRep
        var thePersonelDtoList=thePersonelList.Select(x => new GetPersonelByDepartmentIdDto(x.Id,x.FirstName,x.LastName,x.Email,x.HireDate.ToString(),x.Department.Name)).ToList();
 
        return ServiceResult<List<GetPersonelByDepartmentIdDto>>.SuccessOk(thePersonelDtoList);
-       
     }
 }

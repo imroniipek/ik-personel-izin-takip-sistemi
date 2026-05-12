@@ -27,7 +27,7 @@ public class LeaveRepository(LeaveDbContext context) : ILeaveRepository
                         x.StartedDate < startOfNextYear&&x.Status==LeaveStatus.Approved)
             .ToListAsync();
 
-        return theLeaveList.Sum(x => x.EndedDate.DayNumber - x.StartedDate.DayNumber + 1);
+        return theLeaveList.Sum(x => x.EndedDate.DayNumber - x.StartedDate.DayNumber+1);
     }
 
     public async Task<Leaves.Domain.Leave?> AddTheLeave(Leaves.Domain.Leave leave)
@@ -142,5 +142,23 @@ public class LeaveRepository(LeaveDbContext context) : ILeaveRepository
 
         return true;
     }
-        
+
+    public async Task<int> GetPendingLeavesCountByPersonelId(int personelId)
+    {
+        var leaves = await context.Leaves
+            .AsNoTracking()
+            .Where(x => x.PersonelId == personelId &&
+                        x.Status == LeaveStatus.Pending)
+            .ToListAsync();
+
+        int totalPendingLeaveDays = 0;
+
+        foreach (var leave in leaves)
+        {
+            int dayCount = leave.EndedDate.DayNumber - leave.StartedDate.DayNumber;
+
+            totalPendingLeaveDays += dayCount;
+        }
+        return totalPendingLeaveDays;
     }
+}

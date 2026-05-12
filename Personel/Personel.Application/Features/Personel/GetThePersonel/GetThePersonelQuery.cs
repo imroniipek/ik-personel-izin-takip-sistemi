@@ -3,5 +3,5 @@ using Shared.ServiceResult;
 
 namespace Personel.Personel.Application.Features.Personel.GetThePersonel;
 
-public record GetThePersonelQuery(int personelId) : IRequest<ServiceResult<GetThePersonelQueryResponse>>
+public record GetThePersonelQuery(int PersonelId) : IRequest<ServiceResult<GetThePersonelQueryResponse>>
 {}

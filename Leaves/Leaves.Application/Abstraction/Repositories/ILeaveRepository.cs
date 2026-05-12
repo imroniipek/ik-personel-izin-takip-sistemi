@@ -26,4 +26,6 @@ public interface ILeaveRepository
     Task<List<Domain.Leave>> GetPendingLeavesForApprovalByPersonelId(int personelId);
 
     Task<bool> UpdateTheLeave(int leaveId, Domain.Leave leave);
+
+    Task<int> GetPendingLeavesCountByPersonelId(int personelId);
 }

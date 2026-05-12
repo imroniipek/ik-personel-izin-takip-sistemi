@@ -1,18 +1,14 @@
 ﻿using MediatR;
 using Personel.Personel.Application.Abstraction;
 using Shared.ServiceResult;
-
 namespace Personel.Personel.Application.Features.Personel.GetThePersonel;
-
-public class GetThePersonelQueryHandler(
-    IPersonelRepository personelRepository,
-    IDepartmentRepository departmentRepository)
+public class GetThePersonelQueryHandler(IPersonelRepository personelRepository, IDepartmentRepository departmentRepository)
     : IRequestHandler<GetThePersonelQuery, ServiceResult<GetThePersonelQueryResponse>>
 {
     public async Task<ServiceResult<GetThePersonelQueryResponse>> Handle(GetThePersonelQuery request,
         CancellationToken cancellationToken)
     {
-        var thePersonel = await personelRepository.GetPersonelByIdAsync(request.personelId);
+        var thePersonel = await personelRepository.GetPersonelByIdAsync(request.PersonelId);
 
         if (thePersonel == null)
         {

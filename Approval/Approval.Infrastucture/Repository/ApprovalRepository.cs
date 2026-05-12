@@ -9,9 +9,7 @@ public class ApprovalRepository(ApprovalDbContext context):IApprovalRepository
     {
 
         context.Approvals.Add(approval);
-
         await context.SaveChangesAsync();
-
         return approval;
         
     }

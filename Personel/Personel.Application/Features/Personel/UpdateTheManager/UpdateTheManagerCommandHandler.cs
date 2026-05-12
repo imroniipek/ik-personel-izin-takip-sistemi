@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Personel.Personel.Application.Abstraction;
 using Shared.ServiceResult;
 

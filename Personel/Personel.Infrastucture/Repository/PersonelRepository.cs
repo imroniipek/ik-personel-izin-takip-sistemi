@@ -38,9 +38,5 @@ public class PersonelRepository(PersonelDbContext context) : IPersonelRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
     }
-
-    public async Task<Domain.Personel?> GetPersonelById(int personelId)
-    {
-        return await context.Personels.AsNoTracking().FirstOrDefaultAsync(x => x.Id == personelId);
-    }
+    
 }

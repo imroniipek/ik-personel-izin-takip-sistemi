@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Personel.Personel.Domain;
-
 namespace Personel.Personel.Infrastucture.Configurations;
 
 public class DepartmentConfiguration : IEntityTypeConfiguration<Department>

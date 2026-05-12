@@ -12,9 +12,7 @@ public class CreateLeaveCommandHandler(
     IPersonelApi personelApi
 ) : IRequestHandler<CreateLeaveCommand, ServiceResult<CreateLeaveResponse>>
 {
-    public async Task<ServiceResult<CreateLeaveResponse>> Handle(
-        CreateLeaveCommand request,
-        CancellationToken cancellationToken)
+    public async Task<ServiceResult<CreateLeaveResponse>> Handle(CreateLeaveCommand request, CancellationToken cancellationToken)
     {
         if (request.EndedDate < request.StartedDate)
         {
@@ -24,17 +22,8 @@ public class CreateLeaveCommandHandler(
                 HttpStatusCode.BadRequest
             );
         }
-
+        
         var thePersonelHire = await personelApi.GetThePersonelHire(request.PersonelId);
-
-        if (thePersonelHire is null)
-        {
-            return ServiceResult<CreateLeaveResponse>.Error(
-                "Personel not found",
-                "İzin talebi oluşturulacak personel bulunamadı.",
-                HttpStatusCode.NotFound
-            );
-        }
 
         var totalEntitledDays = CalculateLeaveDays(thePersonelHire.HireDate, DateTime.UtcNow);
 
@@ -49,7 +38,7 @@ public class CreateLeaveCommandHandler(
 
         var usedLeaveDays = await repository.GetAllLeavesByPersonelIdForTheOneYear(request.PersonelId);
 
-        var requestedLeaveDays = request.EndedDate.DayNumber - request.StartedDate.DayNumber + 1;
+        var requestedLeaveDays = request.EndedDate.DayNumber - request.StartedDate.DayNumber+1;
 
         if (totalEntitledDays < usedLeaveDays + requestedLeaveDays)
         {
@@ -62,6 +51,19 @@ public class CreateLeaveCommandHandler(
             );
         }
 
+        var pendingListCount=await repository.GetPendingLeavesCountByPersonelId(request.PersonelId);
+
+        int k = pendingListCount;
+        
+        if (requestedLeaveDays + pendingListCount > totalEntitledDays - usedLeaveDays)
+        {
+            return ServiceResult<CreateLeaveResponse>.Error(
+                "Insufficient leave entitlement",
+                $"İzin Talep Hakkınız Dolmuştur. En fazla {totalEntitledDays - usedLeaveDays} İzin Hakkı Talebinde Bulunabilirsiniz",
+                HttpStatusCode.BadRequest
+            );
+        }
+        
         var leave = new Domain.Leave
         {
             PersonelId = request.PersonelId,
