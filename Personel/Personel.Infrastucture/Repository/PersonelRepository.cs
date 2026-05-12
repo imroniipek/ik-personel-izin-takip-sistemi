@@ -38,5 +38,18 @@ public class PersonelRepository(PersonelDbContext context) : IPersonelRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
     }
-    
+
+    public async Task<bool> DeletePersonelByIdAsync(int personelId)
+    {
+        var theEntity= context.Personels.FirstOrDefault(x => x.Id == personelId);
+
+        if (theEntity != null)
+        {
+            context.Personels.Remove(theEntity);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        return false;
+    }
 }

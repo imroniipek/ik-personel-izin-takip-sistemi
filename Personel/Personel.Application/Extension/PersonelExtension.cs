@@ -45,6 +45,7 @@ public static class EndpointExtensions
         adminGroup.AddGetAllPersonelByDepartmentIdEnpoint();
         adminGroup.AddGetManagerCountManager();
         adminGroup.AddUpdateTheManagerEndpoint();
+        adminGroup.AddDeleteTheManagerEndpoint();
         internalGroup.MapGetPersonelForLeaveEndpoint();
         internalGroup.GetPersonelsByManagerIdRoute();
         personelGroup.AddGetPersonelByEmailEndpoint();

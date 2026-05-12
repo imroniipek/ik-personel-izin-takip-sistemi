@@ -61,8 +61,16 @@ public static class AuthEndpoint
                 ));
             }
 
+          
             if (request.Role == "personel")
             {
+                var isManager = await departmentRepository.IsThisAManager(personel.Id);
+
+                if (isManager)
+                {
+                    return Results.Conflict("Bu email bir manager'a aittir. Personel ile giriş yapılamaz.");
+                }
+
                 var token = tokenService.CreateToken(
                     personel.Id,
                     personel.Email,

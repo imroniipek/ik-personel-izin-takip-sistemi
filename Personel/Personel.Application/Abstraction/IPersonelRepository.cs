@@ -17,5 +17,7 @@ public interface IPersonelRepository
     Task<List<Domain.Personel>> GetAllPersonelsByDepartmentIdAsync(int departmentId);
 
     Task<Domain.Personel?> GetPersonelByEmailAsync(string email);
-    
+
+    Task<bool> DeletePersonelByIdAsync(int personelId);
+
 }

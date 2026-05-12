@@ -52,8 +52,6 @@ public class CreateLeaveCommandHandler(
         }
 
         var pendingListCount=await repository.GetPendingLeavesCountByPersonelId(request.PersonelId);
-
-        int k = pendingListCount;
         
         if (requestedLeaveDays + pendingListCount > totalEntitledDays - usedLeaveDays)
         {
