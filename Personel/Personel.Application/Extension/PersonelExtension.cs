@@ -1,4 +1,4 @@
-﻿using Leaves.Leaves.Application.Features.UpdateTheLeave;
+﻿
 using Personel.Personel.Application.Features.Auth;
 using Personel.Personel.Application.Features.Department.CreateDepartment;
 using Personel.Personel.Application.Features.Department.GetAllDepartmentWithNames;
@@ -7,6 +7,7 @@ using Personel.Personel.Application.Features.Personel.GetPersonelsByManagerId;
 using Personel.Personel.Application.Features.Personel.CreateManager;
 using Personel.Personel.Application.Features.Personel.CreatePersonel;
 using Personel.Personel.Application.Features.Personel.DeleteTheManager;
+using Personel.Personel.Application.Features.Personel.DeleteThePersonel;
 using Personel.Personel.Application.Features.Personel.GetAllPersonel;
 using Personel.Personel.Application.Features.Personel.GetAllPersonelsByDepartmentId;
 using Personel.Personel.Application.Features.Personel.GetManagerByEmail;
@@ -16,6 +17,7 @@ using Personel.Personel.Application.Features.Personel.GetPersonelForLeave;
 using Personel.Personel.Application.Features.Personel.GetPersonelsCount;
 using Personel.Personel.Application.Features.Personel.GetThePersonel;
 using Personel.Personel.Application.Features.Personel.UpdateTheManager;
+using Personel.Personel.Application.Features.Personel.UpdateThePersonel;
 
 namespace Personel.Personel.Application.Extension;
 
@@ -38,6 +40,8 @@ public static class EndpointExtensions
         adminGroup.CreateNewPersonelEndpoint();
         adminGroup.AddNewManagerByGivenDepartmentId();
         adminGroup.AddDeleteTheManagerEndpoint();
+        adminGroup.AddDeleteThePersonelCommandEndpoint();
+        adminGroup.AddUpdateThePersonelCommandEndpoint();
         adminGroup.AddGetAllPersonelQueryEndpoint();
         adminGroup.MapGetAllPersonelCountEndpoint();
         adminGroup.GetTheDepartmentCount();
@@ -45,7 +49,6 @@ public static class EndpointExtensions
         adminGroup.AddGetAllPersonelByDepartmentIdEnpoint();
         adminGroup.AddGetManagerCountManager();
         adminGroup.AddUpdateTheManagerEndpoint();
-        adminGroup.AddDeleteTheManagerEndpoint();
         internalGroup.MapGetPersonelForLeaveEndpoint();
         internalGroup.GetPersonelsByManagerIdRoute();
         personelGroup.AddGetPersonelByEmailEndpoint();

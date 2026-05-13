@@ -52,4 +52,23 @@ public class PersonelRepository(PersonelDbContext context) : IPersonelRepository
 
         return false;
     }
+
+    public async Task<bool> UpdateThePersonelAsync(int personelId, Domain.Personel personel)
+    {
+        var theEntity = await context.Personels
+            .FirstOrDefaultAsync(x => x.Id == personelId);
+
+        if (theEntity == null)
+            return false;
+
+        theEntity.FirstName = personel.FirstName;
+        theEntity.LastName = personel.LastName;
+        theEntity.Email = personel.Email;
+        theEntity.HireDate = personel.HireDate;
+        theEntity.DepartmentId = personel.DepartmentId;
+
+        await context.SaveChangesAsync();
+
+        return true;
+    }
 }

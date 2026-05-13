@@ -3,4 +3,4 @@ using Shared.ServiceResult;
 
 namespace Personel.Personel.Application.Features.Personel.DeleteThePersonel;
 
-public record class DeleteThePersonelCommand(int PersonelId):IRequest<ServiceResult<bool>>;
+public record DeleteThePersonelCommand(int PersonelId):IRequest<ServiceResult<bool>>;

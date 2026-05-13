@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Personel.Personel.Application.Abstraction;
+﻿namespace Personel.Personel.Application.Abstraction;
 
 public interface IPersonelRepository
 {
@@ -19,5 +16,7 @@ public interface IPersonelRepository
     Task<Domain.Personel?> GetPersonelByEmailAsync(string email);
 
     Task<bool> DeletePersonelByIdAsync(int personelId);
+
+    Task<bool> UpdateThePersonelAsync(int personelId, Domain.Personel personel);
 
 }

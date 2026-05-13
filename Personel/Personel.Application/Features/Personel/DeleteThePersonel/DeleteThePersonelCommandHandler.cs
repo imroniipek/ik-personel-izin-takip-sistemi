@@ -1,8 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Personel.Personel.Application.Abstraction;
 using Shared.ServiceResult;
-
 namespace Personel.Personel.Application.Features.Personel.DeleteThePersonel;
 
 public class DeleteThePersonelCommandHandler(IPersonelRepository repository):IRequestHandler<DeleteThePersonelCommand,ServiceResult<bool>>
