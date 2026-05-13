@@ -13,6 +13,7 @@ using Personel.Personel.Application.Features.Personel.GetAllPersonelsByDepartmen
 using Personel.Personel.Application.Features.Personel.GetManagerByEmail;
 using Personel.Personel.Application.Features.Personel.GetManagersCount;
 using Personel.Personel.Application.Features.Personel.GetPersonelByEmail;
+using Personel.Personel.Application.Features.Personel.GetPersonelByPersonelId;
 using Personel.Personel.Application.Features.Personel.GetPersonelForLeave;
 using Personel.Personel.Application.Features.Personel.GetPersonelsCount;
 using Personel.Personel.Application.Features.Personel.GetThePersonel;
@@ -42,19 +43,19 @@ public static class EndpointExtensions
         adminGroup.AddDeleteTheManagerEndpoint();
         adminGroup.AddDeleteThePersonelCommandEndpoint();
         adminGroup.AddUpdateThePersonelCommandEndpoint();
+        adminGroup.AddUpdateTheManagerEndpoint();
         adminGroup.AddGetAllPersonelQueryEndpoint();
         adminGroup.MapGetAllPersonelCountEndpoint();
+        adminGroup.AddGetPersonelIdEndpoint();
         adminGroup.GetTheDepartmentCount();
         adminGroup.AddGetAllDepartmentsWithNamesQueryEndpoint();
         adminGroup.AddGetAllPersonelByDepartmentIdEnpoint();
         adminGroup.AddGetManagerCountManager();
-        adminGroup.AddUpdateTheManagerEndpoint();
         internalGroup.MapGetPersonelForLeaveEndpoint();
         internalGroup.GetPersonelsByManagerIdRoute();
         personelGroup.AddGetPersonelByEmailEndpoint();
         personelGroup.AddGetThePersonelQueryEndpoint();
         personelGroup.AddGetManagerByEmailEndpoint();
-
         return app;
     }
 }

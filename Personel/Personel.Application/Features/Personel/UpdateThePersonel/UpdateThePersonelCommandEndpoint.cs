@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Shared.ServiceResult.Extensions;
-
 namespace Personel.Personel.Application.Features.Personel.UpdateThePersonel;
 
 public static class UpdateThePersonelCommandEndpoint

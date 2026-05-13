@@ -71,4 +71,9 @@ public class PersonelRepository(PersonelDbContext context) : IPersonelRepository
 
         return true;
     }
+
+    public async Task<Domain.Personel?> GetThePersonelByPersonelId(int personelId)
+    {
+        return await context.Personels.AsNoTracking().FirstOrDefaultAsync(x => x.Id == personelId);
+    }
 }

@@ -19,4 +19,6 @@ public interface IPersonelRepository
 
     Task<bool> UpdateThePersonelAsync(int personelId, Domain.Personel personel);
 
+    Task<Domain.Personel? >GetThePersonelByPersonelId(int personelId);
+
 }
