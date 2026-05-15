@@ -159,6 +159,6 @@ public class LeaveRepository(LeaveDbContext context) : ILeaveRepository
 
             totalPendingLeaveDays += dayCount;
         }
-        return totalPendingLeaveDays;
+        return totalPendingLeaveDays+1;
     }
 }

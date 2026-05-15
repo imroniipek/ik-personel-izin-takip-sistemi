@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Personel.Personel.Application.Abstraction;
+using Personel.Personel.Application.Features.Personel.Dtos;
 using Personel.Personel.Infrastucture.Context;
 
 namespace Personel.Personel.Infrastucture.Repository;
@@ -75,5 +76,15 @@ public class PersonelRepository(PersonelDbContext context) : IPersonelRepository
     public async Task<Domain.Personel?> GetThePersonelByPersonelId(int personelId)
     {
         return await context.Personels.AsNoTracking().FirstOrDefaultAsync(x => x.Id == personelId);
+    }
+
+    public async Task<List<PersonelDto>> GetAllPersonelsWithoutManager(int managerId, int departmentId)
+    {
+        var personelList = await context.Personels
+            .AsNoTracking()
+            .Include(x => x.Department)
+            .Where(x => x.DepartmentId == departmentId && x.Id != managerId).Select(x => new PersonelDto(x.Id, x.FirstName, x.LastName, x.Email, x.HireDate, x.Department.Name))
+            .ToListAsync();
+        return personelList;
     }
 }

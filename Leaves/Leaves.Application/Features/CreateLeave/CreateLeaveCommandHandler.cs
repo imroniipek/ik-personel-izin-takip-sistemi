@@ -46,7 +46,7 @@ public class CreateLeaveCommandHandler(
 
             return ServiceResult<CreateLeaveResponse>.Error(
                 "Insufficient leave entitlement",
-                $"Çalışan en fazla {remainingDays} gün daha izin kullanabilir.",
+                $"Durum-1: İzin Gün Sayısı Yetersiz: Çalışan en fazla {remainingDays} gün daha izin kullanabilir.",
                 HttpStatusCode.BadRequest
             );
         }
@@ -57,7 +57,7 @@ public class CreateLeaveCommandHandler(
         {
             return ServiceResult<CreateLeaveResponse>.Error(
                 "Insufficient leave entitlement",
-                $"İzin Talep Hakkınız Dolmuştur. En fazla {totalEntitledDays - usedLeaveDays} İzin Hakkı Talebinde Bulunabilirsiniz",
+                $"Durum-2: İzin Talep Sayısı Aşımı: İzin Talep Hakkınız Dolmuştur. Toplamda {pendingListCount} gün izin talebinde bulundunuz. Bölüm Yöneticiniz tarafından izin talepleriniz cevaplandıktan sonra tekrar deneyiniz .En fazla {totalEntitledDays - usedLeaveDays} İzin Hakkı Talebinde Bulunabilirsiniz",
                 HttpStatusCode.BadRequest
             );
         }

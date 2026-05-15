@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Personel.Personel.Application.Abstraction;
 using Shared.ServiceResult;
-
 namespace Personel.Personel.Application.Features.Personel.UpdateThePersonel;
 
 public class UpdateThePersonelCommandHandler(IPersonelRepository repository):IRequestHandler<UpdateThePersonelCommand,ServiceResult>

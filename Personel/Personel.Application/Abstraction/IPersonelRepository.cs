@@ -1,4 +1,6 @@
-﻿namespace Personel.Personel.Application.Abstraction;
+﻿using Personel.Personel.Application.Features.Personel.Dtos;
+
+namespace Personel.Personel.Application.Abstraction;
 
 public interface IPersonelRepository
 {
@@ -21,4 +23,5 @@ public interface IPersonelRepository
 
     Task<Domain.Personel? >GetThePersonelByPersonelId(int personelId);
 
+    Task<List<PersonelDto>> GetAllPersonelsWithoutManager(int managerId, int departmentId);
 }

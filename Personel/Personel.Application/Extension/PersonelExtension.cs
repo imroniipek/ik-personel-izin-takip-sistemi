@@ -1,5 +1,4 @@
-﻿
-using Personel.Personel.Application.Features.Auth;
+﻿using Personel.Personel.Application.Features.Auth;
 using Personel.Personel.Application.Features.Department.CreateDepartment;
 using Personel.Personel.Application.Features.Department.GetAllDepartmentWithNames;
 using Personel.Personel.Application.Features.Department.GetDepartmentCount;
@@ -19,7 +18,6 @@ using Personel.Personel.Application.Features.Personel.GetPersonelsCount;
 using Personel.Personel.Application.Features.Personel.GetThePersonel;
 using Personel.Personel.Application.Features.Personel.UpdateTheManager;
 using Personel.Personel.Application.Features.Personel.UpdateThePersonel;
-
 namespace Personel.Personel.Application.Extension;
 
 public static class EndpointExtensions
