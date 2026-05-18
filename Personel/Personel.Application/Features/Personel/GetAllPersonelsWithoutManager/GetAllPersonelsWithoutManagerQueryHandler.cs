@@ -5,9 +5,8 @@ using Shared.ServiceResult;
 
 namespace Personel.Personel.Application.Features.Personel.GetAllPersonelsWithoutManager;
 
-public class GetAllPersonelsWithoutManagerQueryHandler(
-    IPersonelRepository repository
-) : IRequestHandler<GetAllPersonelsWithoutManagerQuery, ServiceResult<List<PersonelDto>>>
+public class GetAllPersonelsWithoutManagerQueryHandler(IPersonelRepository repository ) 
+    : IRequestHandler<GetAllPersonelsWithoutManagerQuery, ServiceResult<List<PersonelDto>>>
 {
     public async Task<ServiceResult<List<PersonelDto>>> Handle(
         GetAllPersonelsWithoutManagerQuery request,
